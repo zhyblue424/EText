@@ -1,0 +1,14 @@
+autoattack==0.1
+einops==0.8.1
+ftfy==6.3.1
+h5py==3.12.1
+h5py==3.11.0
+numpy==2.3.1
+Pillow==11.3.0
+pycountry==24.6.1
+regex==2024.9.11
+scipy==1.16.0
+setuptools==78.1.0
+torch==2.1.2+cu118
+torchvision==0.16.2+cu118
+tqdm==4.66.5
