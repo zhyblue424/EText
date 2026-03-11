@@ -84,17 +84,16 @@ def parse_option():
                         help='choose visual adaptation method')
     parser.add_argument('--Distance_metric', type=str, default='l2', choices=['cos', 'l2', 'KL', 'l1'],
                         help='Select the distance measure in the loss function')
-    parser.add_argument('--atten_methods',type=str,default='text',choices=['text','visual'])
     parser.add_argument('--Alpha', type=float, default=0.03,help='loss 1')
     parser.add_argument('--Beta', type=float, default=0.07, help='loss 2')
     parser.add_argument('--gamma', type=int, default=900, help='random texts number')
     parser.add_argument('--testdata', type=str, nargs='+')
     args = parser.parse_args()
 
-    args.filename = '{}_{}_{}_{}_{}_lr-{}_decay-{}_bsz-{}_warmup-{}_trial-{}_addp-{}_Alpha-{}_Beta-{}_gamma-{}_distance-{}_atten_methods-{}'. \
+    args.filename = '{}_{}_{}_{}_{}_lr-{}_decay-{}_bsz-{}_warmup-{}_trial-{}_Alpha-{}_Beta-{}_gamma-{}_distance-{}'. \
         format(args.adaptation_method,args.dataset, args.model, args.arch,
                args.optim, args.learning_rate, args.weight_decay, args.batch_size, args.warmup, args.trial,
-               args.add_prompt_size, args.Alpha, args.Beta, args.gamma, args.Distance_metric, args.atten_methods)
+            args.Alpha, args.Beta, args.gamma, args.Distance_metric)
     return args
     
 
@@ -231,7 +230,7 @@ def main():
         os.makedirs(args.model_folder)
 
     epochs_since_improvement = 0
-    
+    best_acc1 = 0.
     """training"""
     for epoch in range(args.start_epoch, args.epochs):
         train(train_loader, texts_train, model,frozen_model, prompter, add_prompter, optimizer, scheduler, scaler, epoch,  args)
